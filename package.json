@@ -1,11 +1,14 @@
 {
-  "name": "ot-toy",
+  "name": "ot-crdt-view",
   "version": "0.0.1",
-  "license": "Apache-2.0",
-  "description": "testbed for operational transformation",
+  "license": "MIT, Apache 2.0",
+  "description": "View for the hot-cat editor",
   "dependencies": {
     "express": "^4.14.0",
-    "socket.io": "^1.4.8",
-    "sleep": "^5.1.0"
-  }
+    "sleep": "^5.1.0",
+    "socket.io": "^1.4.8"
+  },
+  "main": "index.js",
+  "repository": "https://github.com/nyxnaut/ot-crdt-view",
+  "author": "Wil.ly Hellcat <newellwm@gmail.com>"
 }

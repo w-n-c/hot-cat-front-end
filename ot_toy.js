@@ -192,21 +192,21 @@ class DocState {
 				var ix = xi_inv(this.dels, op.ix);
 				this.dels = union_one(this.dels, op.ix);
 				this.str = this.str.slice(0, ix) + this.str.slice(ix + 1);
-                for (var i = 0; i < this.points.length; i++) {
-                    if (this.points[i] > ix) {
-                        this.points[i] -= 1;
-                    }
-                }
+				for (var i = 0; i < this.points.length; i++) {
+					if (this.points[i] > ix) {
+						this.points[i] -= 1;
+					}
+				}
 			}
 		} else if (op.ty == 'ins') {
 			this.dels = xi_one(this.dels, op.ix);
 			var ix = xi_inv(this.dels, op.ix);
 			this.str = this.str.slice(0, ix) + op.ch + this.str.slice(ix);
-            for (var i = 0; i < this.points.length; i++) {
-                if (this.points[i] > ix) {
-                    this.points[i] += 1;
-                }
-            }
+			for (var i = 0; i < this.points.length; i++) {
+				if (this.points[i] > ix) {
+					this.points[i] += 1;
+				}
+			}
 		}
 	}
 
