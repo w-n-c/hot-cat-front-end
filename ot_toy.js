@@ -182,7 +182,7 @@ class DocState {
 		this.ops = [];
 		this.dels = null;
 		this.str = "";
-        this.points = [];  // in user-visible string coordinates
+		this.points = [];  // in user-visible string coordinates
 	}
 
 	add(op) {
@@ -210,13 +210,13 @@ class DocState {
 		}
 	}
 
-    xform_ix(ix) {
-        return xi(this.dels, ix);
-    }
+	xform_ix(ix) {
+		return xi(this.dels, ix);
+	}
 
-    get_str() {
-        return this.str;
-    }
+	get_str() {
+		return this.str;
+	}
 }
 
 class Peer {
@@ -262,13 +262,13 @@ class Peer {
 		for (var i = ins_list.length - 1; i >= 0; i--) {
 			op = transform_ins(op, ins_list[i][0], ins_list[i][1]);
 		}
-        var current = (this.rev == ops.length);
+		var current = (this.rev == ops.length);
 		doc_state.add(op);
-        if (current) {
-            this.rev++;
-        } else {
-            this.context.add(id);
-        }
+		if (current) {
+			this.rev++;
+		} else {
+			this.context.add(id);
+		}
 	}
 }
 
