@@ -8,9 +8,10 @@ Mit Licensed, details viewable at https://github.com/nyxnaut/ot-crdt-view
 	<meta charset="utf-8">
 	<title>Hot-Cat Editor</title>
 	<meta name="description" content="A web based code editor">
+	<script src="bower_components/webcomponentsjs/webcomponents-loader.js"></script>
 	<link rel="import" href="../bower_components/d2l-menu/d2l-menu.html">
 	<link rel="import" href="../bower_components/d2l-menu/d2l-menu-item.html">
-	<script src="bower_components/webcomponentsjs/webcomponents-loader.js"></script>
+    <link rel="stylesheet" href="https://gist.github.com/nyxnaut/cae5415db9d669d5ed3d5aa8416e8919">
 	<style>
 		body {
 			display: block;
@@ -20,39 +21,49 @@ Mit Licensed, details viewable at https://github.com/nyxnaut/ot-crdt-view
 			min-height: 100vh;
 			background-color: #eeeeee;
 		}
+		main {
+			height: 400px;
+		}
 	</style>
 </head>
 <body>
 	<h1>Hot-Cat Editor</h1>
 	<d2l-menu id="menu" label="filesystem"></d2l-menu>
-	<textarea id="text" cols="80" rows="24" autofocus></textarea>
+	<main id="editor"></main>
 	<noscript>
 		It is literally impossible to use any of this app without JavaScript.
 		Please enable JS and reload to use this site.
 	</noscript>
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.8/ace.js" type="text/javascript" charset="utf-8"></script>
 <script>
+	const editor   = ace.edit("editor");
 	const menuRoot = document.getElementById("menu");
-	const method   = "GET";
-	const url      = "/api/v0/directory";
-	const xhr      = new XMLHttpRequest();
-	xhr.open(method, url, true);
-	xhr.onreadystatechange = () => {
-		if(xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-			addDir(JSON.parse(xhr.responseText), menuRoot);
+	const directory = getData("/api/v0/directory", addDir)
+
+	appDirMenu(directory, menuRoot);
+	editor.setTheme("ace/theme/monokai");
+	editor.getSession().setMode("ace/mode/javascript");
+
+	const getData = (url) => {
+		const xhr      = new XMLHttpRequest();
+		xhr.onreadystatechange = () => {
+			if(xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+				return JSON.parse(xhr.responseText);
+			}
 		}
+		xhr.open("GET", url, true);
+		xhr.send();
 	}
-	xhr.send();
-	const addDir = (obj, root) => {
-		console.log(obj)
+	const appDirMenu = (obj, root) => {
 		Object.keys(obj).forEach(key => {
 			if (key === 'directories') {
 				Object.keys(obj[key]).forEach(el => {
 					const file = document.createElement("d2l-menu-item");
 					const dir = document.createElement("d2l-menu");
 					file.setAttribute('text', el);
-					root.appendChild(file);
 					file.appendChild(dir);
+					root.appendChild(file);
 					addDir(obj[key][el], dir);
 				});
 			} else if (key === 'files') {
@@ -62,7 +73,7 @@ Mit Licensed, details viewable at https://github.com/nyxnaut/ot-crdt-view
 					root.appendChild(file);
 				});
 			} else {
-				console.log("Error in object key: " + key);
+				console.log("Unexpected key in directory object: " + key);
 			}
 		});
 	}
