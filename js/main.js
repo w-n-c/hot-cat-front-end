@@ -1,5 +1,6 @@
 (function() {
 	const editor    = ace.edit("editor");
+	const modelist  = ace.require("ace/ext/modelist");
 	const filepath  = "api/v0/file";
 	const files     = document.getElementsByTagName("d2l-menu-item");
 	const dirs      = document.getElementsByTagName("d2l-menu");
@@ -49,7 +50,6 @@
 		});
 	};
 	const toggleDisplay = (el) => {
-		// causes a bug with media query, need to update
 		(style => {
 			style.display = style.display === 'none' ? '' : 'none';
 		})(el.style);
@@ -73,6 +73,8 @@
 			}
 		};
 		currentFile += `/${event.target.getAttribute("text")}`;
+		const mode = modelist.getModeForPath(currentFile).mode;
+		editor.session.setMode(mode)
 		getData(currentFile).then(file => {
 			editor.setValue(file);
 		}).catch(reason => {
@@ -90,6 +92,22 @@
 	editor.setTheme("ace/theme/monokai");
 	editor.getSession().setMode("ace/mode/javascript");
 	editor.$blockScrolling = Infinity;
-	document.getElementById('editor').style.fontSize='14px';
+	editor.setOptions({
+		enableBasicAutocompletion: true,
+		enableSnippets: true,
+		enableLiveAutocompletion: false
+	})
+	editor.commands.addCommand({
+		name: "showKeyboardShortcuts",
+		bindKey: {win: "Ctrl+Alt+h", mac: "Command-Alt-h"},
+		exec: (editor) => {
+			ace.config.loadModule("ace/ext/keybinding_menu", (module) => {
+				module.init(editor);
+				editor.showKeyboardShortcuts();
+			})
+		}
+	});
+	// shows editor commands on load
+	// editor.execCommand("showKeyboardShortcuts");
+	document.getElementById("editor").style.fontSize="14px";
 })();
-

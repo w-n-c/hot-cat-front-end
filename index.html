@@ -9,45 +9,10 @@ Mit Licensed, details viewable at https://github.com/nyxnaut/ot-crdt-view
 	<title>Hot-Cat Editor</title>
 	<meta name="description" content="A web based code editor">
 	<script src="bower_components/webcomponentsjs/webcomponents-loader.js"></script>
-	<link rel="import" href="../bower_components/d2l-menu/d2l-menu.html">
-	<link rel="import" href="../bower_components/d2l-menu/d2l-menu-item.html">
-    <link rel="stylesheet" href="https://gist.github.com/nyxnaut/cae5415db9d669d5ed3d5aa8416e8919">
-	<style>
-		body {
-			display: block;
-			padding: 0.7rem, 1.5rem;
-			font-family: 'Roboto', 'Noto', sans-serif;
-			line-height: 1.5;
-			min-height: 100vh;
-			background-color: #eeeeee;
-		}
-		header {
-			display: flex;
-			flex-flow: row nowrap;
-			justify-content: space-between;
-			align-items: center;
-			margin: 0 5px;
-		}
-		h1 {
-			margin: 0;
-		}
-		.bar {
-			width: 35px;
-			height: 5px;
-			background-color: black;
-			margin: 6px 0;
-		}
-		main {
-			height: 400px;
-		}
-		@media (min-width: 1000px) {
-			/* unfinished */
-			#menu {
-				width: 200px;
-				float: left;
-			}
-		}
-	</style>
+	<link rel="import" href="bower_components/d2l-menu/d2l-menu.html">
+	<link rel="import" href="bower_components/d2l-menu/d2l-menu-item.html">
+	<link rel="stylesheet" href="css/reset.css">
+	<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 	<header>
@@ -65,6 +30,9 @@ Mit Licensed, details viewable at https://github.com/nyxnaut/ot-crdt-view
 		Please enable JS and reload to use this site.
 	</noscript>
 </body>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.8/ace.js" type="text/javascript" charset="utf-8"></script>
-<script src="main.js" type="text/javascript"></script>
+<script src="node_modules/ace-builds/src-min/ace.js"></script>
+<script src="node_modules/ace-builds/src-min/ext-language_tools.js"></script>
+<script src="node_modules/ace-builds/src-min/ext-keybinding_menu.js"></script>
+<script src="node_modules/ace-builds/src-min/ext-modelist.js"></script>
+<script src="js/main.js"></script>
 </html>
