@@ -2,10 +2,7 @@ body {
 	padding: 0.7rem, 1.5rem;
 	font-family: 'Roboto', 'Noto', sans-serif;
 	line-height: 1.5;
-	min-height: 100vh;
 	background-color: #eeeeee;
-	display: flex;
-	flex-flow: column nowrap;
 }
 header {
 	display: flex;
@@ -24,12 +21,23 @@ h1 {
 	margin: 6px 0;
 }
 main {
+	display: flex;
+	flex-flow: column nowrap;
+	min-height: 100vh;
+}
+article {
 	flex-grow: 1;
+	flex-basis: 100%;
 }
 @media (min-width: 1000px) {
-	/* unfinished */
+	main {
+		flex-flow: row wrap;
+		align-content: flex-start;
+	}
+	article {
+		flex-basis: auto;
+	}
 	#menu {
 		width: 200px;
-		float: left;
 	}
 }
