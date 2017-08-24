@@ -1,0 +1,22 @@
+{
+  "name": "ot-crdt-view",
+  "description": "View for the hot-cat editor",
+  "main": "index.js",
+  "authors": [
+    "Wil.ly Hellcat <newellwm@gmail.com>"
+  ],
+  "license": "SEE LICENSE IN LICENSE",
+  "homepage": "https://github.com/nyxnaut/ot-crdt-view",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "d2l-menu": "^1.0.3",
+    "webcomponentsjs": "^1.0.8"
+  }
+}
